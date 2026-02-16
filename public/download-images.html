@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Download Hero Images</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .image-box {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #4F46E5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #4338CA;
+        }
+
+        .instructions {
+            background: #EEF2FF;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #4F46E5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📸 Hero Images for Budget App</h1>
+
+        <div class="instructions">
+            <strong>Instructions:</strong>
+            <ol>
+                <li>Right-click on each image below</li>
+                <li>Select "Save image as..."</li>
+                <li>Save to the <code>public</code> folder in your Budget app directory</li>
+                <li>Name them: <code>hero-light.png</code> and <code>hero-dark.png</code></li>
+            </ol>
+        </div>
+
+        <div class="image-box">
+            <h3>Light Mode Image (Blue)</h3>
+            <p>Use this for light mode - save as <strong>hero-light.png</strong></p>
+            <canvas id="lightCanvas" width="800" height="600"></canvas>
+            <br>
+            <button onclick="downloadLight()">Download Light Mode Image</button>
+        </div>
+
+        <div class="image-box">
+            <h3>Dark Mode Image (Yellow)</h3>
+            <p>Use this for dark mode - save as <strong>hero-dark.png</strong></p>
+            <canvas id="darkCanvas" width="800" height="600"></canvas>
+            <br>
+            <button onclick="downloadDark()">Download Dark Mode Image</button>
+        </div>
+    </div>
+
+    <script>
+        // Draw Light Mode Image (Blue)
+        function drawLightImage() {
+            const canvas = document.getElementById('lightCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Background
+            ctx.fillStyle = '#E0E7FF';
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Calendar
+            ctx.fillStyle = '#4F46E5';
+            ctx.fillRect(200, 100, 400, 350);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(230, 150, 340, 250);
+
+            // Calendar tabs
+            for (let i = 0; i < 4; i++) {
+                ctx.fillStyle = '#4F46E5';
+                ctx.fillRect(250 + (i * 80), 80, 50, 40);
+            }
+
+            // Calendar grid
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 3; col++) {
+                    ctx.fillStyle = '#4F46E5';
+                    ctx.fillRect(250 + (col * 100), 180 + (row * 70), 70, 50);
+                }
+            }
+
+            // Dollar sign circle
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(550, 400, 80, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = '#4F46E5';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+
+            // Dollar sign
+            ctx.fillStyle = '#4F46E5';
+            ctx.font = 'bold 80px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('$', 550, 400);
+        }
+
+        // Draw Dark Mode Image (Yellow)
+        function drawDarkImage() {
+            const canvas = document.getElementById('darkCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Background
+            ctx.fillStyle = '#FDB913';
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Calendar
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(200, 100, 400, 350);
+            ctx.fillStyle = '#FDB913';
+            ctx.fillRect(230, 150, 340, 250);
+
+            // Calendar tabs
+            for (let i = 0; i < 4; i++) {
+                ctx.fillStyle = '#000000';
+                ctx.fillRect(250 + (i * 80), 80, 50, 40);
+            }
+
+            // Calendar grid
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 3; col++) {
+                    ctx.fillStyle = '#000000';
+                    ctx.fillRect(250 + (col * 100), 180 + (row * 70), 70, 50);
+                }
+            }
+
+            // Dollar sign circle
+            ctx.fillStyle = '#FDB913';
+            ctx.beginPath();
+            ctx.arc(550, 400, 80, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+
+            // Dollar sign
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 80px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('$', 550, 400);
+        }
+
+        function downloadLight() {
+            const canvas = document.getElementById('lightCanvas');
+            const link = document.createElement('a');
+            link.download = 'hero-light.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function downloadDark() {
+            const canvas = document.getElementById('darkCanvas');
+            const link = document.createElement('a');
+            link.download = 'hero-dark.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Draw images on load
+        drawLightImage();
+        drawDarkImage();
+    </script>
+</body>
+
+</html>

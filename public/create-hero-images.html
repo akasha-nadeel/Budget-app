@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Create Hero Images</title>
+</head>
+
+<body>
+    <h1>Creating hero images...</h1>
+    <canvas id="lightCanvas" width="1200" height="800"></canvas>
+    <canvas id="darkCanvas" width="1200" height="800"></canvas>
+
+    <script>
+        // Create Light Mode Image (Blue with white background)
+        const lightCanvas = document.getElementById('lightCanvas');
+        const lightCtx = lightCanvas.getContext('2d');
+
+        // White/light blue background
+        lightCtx.fillStyle = '#E8EAF6';
+        lightCtx.fillRect(0, 0, 1200, 800);
+
+        // Draw calendar (blue)
+        lightCtx.fillStyle = '#3F51B5';
+        lightCtx.shadowColor = 'rgba(0,0,0,0.2)';
+        lightCtx.shadowBlur = 20;
+        lightCtx.shadowOffsetX = 0;
+        lightCtx.shadowOffsetY = 10;
+
+        // Calendar body
+        lightCtx.fillRect(300, 200, 450, 400);
+
+        // Calendar tabs
+        for (let i = 0; i < 4; i++) {
+            lightCtx.fillRect(330 + (i * 100), 170, 70, 50);
+        }
+
+        // White inner area
+        lightCtx.shadowBlur = 0;
+        lightCtx.fillStyle = '#FFFFFF';
+        lightCtx.fillRect(340, 270, 390, 280);
+
+        // Calendar grid (blue squares)
+        lightCtx.fillStyle = '#3F51B5';
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                lightCtx.fillRect(360 + (col * 120), 290 + (row * 85), 90, 65);
+            }
+        }
+
+        // Dollar circle
+        lightCtx.shadowBlur = 20;
+        lightCtx.shadowColor = 'rgba(0,0,0,0.3)';
+        lightCtx.fillStyle = '#FFFFFF';
+        lightCtx.beginPath();
+        lightCtx.arc(680, 580, 120, 0, 2 * Math.PI);
+        lightCtx.fill();
+
+        lightCtx.strokeStyle = '#3F51B5';
+        lightCtx.lineWidth = 10;
+        lightCtx.stroke();
+
+        // Dollar sign
+        lightCtx.shadowBlur = 0;
+        lightCtx.fillStyle = '#3F51B5';
+        lightCtx.font = 'bold 140px Arial';
+        lightCtx.textAlign = 'center';
+        lightCtx.textBaseline = 'middle';
+        lightCtx.fillText('$', 680, 580);
+
+        // Create Dark Mode Image (Yellow/Gold with yellow background)
+        const darkCanvas = document.getElementById('darkCanvas');
+        const darkCtx = darkCanvas.getContext('2d');
+
+        // Yellow background
+        darkCtx.fillStyle = '#FDB913';
+        darkCtx.fillRect(0, 0, 1200, 800);
+
+        // Draw calendar (black)
+        darkCtx.fillStyle = '#000000';
+        darkCtx.shadowColor = 'rgba(0,0,0,0.4)';
+        darkCtx.shadowBlur = 25;
+        darkCtx.shadowOffsetX = 0;
+        darkCtx.shadowOffsetY = 10;
+
+        // Calendar body
+        darkCtx.fillRect(300, 200, 450, 400);
+
+        // Calendar tabs
+        for (let i = 0; i < 4; i++) {
+            darkCtx.fillRect(330 + (i * 100), 170, 70, 50);
+        }
+
+        // Yellow inner area
+        darkCtx.shadowBlur = 0;
+        darkCtx.fillStyle = '#FDB913';
+        darkCtx.fillRect(340, 270, 390, 280);
+
+        // Calendar grid (black squares)
+        darkCtx.fillStyle = '#000000';
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                darkCtx.fillRect(360 + (col * 120), 290 + (row * 85), 90, 65);
+            }
+        }
+
+        // Dollar circle
+        darkCtx.shadowBlur = 25;
+        darkCtx.shadowColor = 'rgba(0,0,0,0.4)';
+        darkCtx.fillStyle = '#FDB913';
+        darkCtx.beginPath();
+        darkCtx.arc(680, 580, 120, 0, 2 * Math.PI);
+        darkCtx.fill();
+
+        darkCtx.strokeStyle = '#000000';
+        darkCtx.lineWidth = 10;
+        darkCtx.stroke();
+
+        // Dollar sign
+        darkCtx.shadowBlur = 0;
+        darkCtx.fillStyle = '#000000';
+        darkCtx.font = 'bold 140px Arial';
+        darkCtx.textAlign = 'center';
+        darkCtx.textBaseline = 'middle';
+        darkCtx.fillText('$', 680, 580);
+
+        // Auto-download both images
+        setTimeout(() => {
+            // Download light image
+            lightCanvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'hero-light.png';
+                a.click();
+            });
+
+            // Download dark image
+            setTimeout(() => {
+                darkCanvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'hero-dark.png';
+                    a.click();
+                });
+            }, 500);
+        }, 500);
+    </script>
+</body>
+
+</html>

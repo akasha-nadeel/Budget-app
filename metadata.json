@@ -1,0 +1,5 @@
+{
+  "name": "SmartBudget new3",
+  "description": "A mobile-first budget tracking application with multi-source tracking, essential/non-essential categorization, calendar insights, and AI-powered spending analysis.",
+  "requestFramePermissions": []
+}
