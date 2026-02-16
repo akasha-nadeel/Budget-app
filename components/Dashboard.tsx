@@ -88,7 +88,7 @@ const Dashboard: React.FC = () => {
         <div className="absolute top-0 left-0 w-full h-full p-8 flex flex-col justify-between text-white z-10">
           <div className="flex justify-between items-start pt-4">
             <div>
-              <p className="text-slate-300 dark:text-yellow-900 font-medium text-sm mb-1 uppercase tracking-widest opacity-90">Total Balance</p>
+              <p className="text-slate-300 dark:text-white font-medium text-sm mb-1 uppercase tracking-widest">Total Balance</p>
               <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-sm dark:text-yellow-50">Rs. {totalBalance.toLocaleString()}</h1>
             </div>
           </div>
@@ -101,7 +101,7 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-slate-400 dark:text-yellow-800 text-xs uppercase tracking-wider font-semibold">Total Spent</p>
+              <p className="text-slate-400 dark:text-white text-xs uppercase tracking-wider font-semibold">Total Spent</p>
               <p className="text-xl font-bold text-white">Rs. {totalSpent.toLocaleString()}</p>
             </div>
           </div>
